@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nailleh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#121212',
+                        light: '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .snowflake {
+            position: absolute;
+            color: #fff;
+            user-select: none;
+            pointer-events: none;
+            z-index: 0;
+            backface-visibility: hidden;
+            will-change: transform, opacity;
+        }
+        .social-icon {
+            transition: transform 0.3s ease, color 0.3s ease;
+            width: 100%;
+            max-width: 250px;
+        }
+        .social-icon:hover {
+            transform: translateY(-5px);
+        }
+        .glow-text {
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+        .theme-toggle {
+            transition: all 0.3s ease;
+        }
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+        }
+        .avatar {
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body class="bg-black text-light h-screen overflow-hidden">
+    <header class="container mx-auto px-4 py-8">
+    </header>
+    <main class="flex-grow flex items-center justify-center">
+        <div class="container mx-auto px-4 py-12">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-12">
+                <div class="flex flex-col items-center">
+                    <div class="avatar w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mb-8">
+                        <img src="https://upload.wikimedia.org/wikipedia/tr/1/19/Scarfaceinthefall.jpg" alt="Nailleh" class="w-full h-full object-cover">
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-2 glow-text">Nailleh</h1>
+                    <h2 class="text-xl md:text-2xl text-gray-300 mb-12">Founder of Nailleh API Services</h2>
+                    <div class="flex flex-col gap-4 w-full max-w-xs items-center">
+                        <a href="https://www.instagram.com/naillehinc" class="social-icon flex items-center gap-4 px-4 py-2 rounded-lg bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-pink-500 transition-all w-full">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/instagram.svg" width="24" height="24" class="flex-shrink-0" />
+                            <span class="flex-grow text-center">Instagram</span>
+                        </a>
+                        <a href="https://open.spotify.com/user/31b6nly2kqrvdctlczweznlba5pi?si=9473200385964fe5" class="social-icon flex items-center gap-4 px-4 py-2 rounded-lg bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-green-500 transition-all w-full">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/spotify.svg" width="24" height="24" class="flex-shrink-0" />
+                            <span class="flex-grow text-center">Spotify</span>
+                        </a>
+                        <a href="https://discord.com/users/nailleh" class="social-icon flex items-center gap-4 px-4 py-2 rounded-lg bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-indigo-500 transition-all w-full">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/discord.svg" width="24" height="24" class="flex-shrink-0" />
+                            <span class="flex-grow text-center">Discord</span>
+                        </a>
+                        <a href="https://t.me/nailleh" class="social-icon flex items-center gap-4 px-4 py-2 rounded-lg bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-blue-500 transition-all w-full">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/telegram.svg" width="24" height="24" class="flex-shrink-0" />
+                            <span class="flex-grow text-center">Telegram</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="py-6 text-center text-gray-500 text-sm">
+    </footer>
+    <script>
+        feather.replace();
+        function createSnowflakes() {
+            const isMobile = window.innerWidth < 768;
+            const snowflakes = ['❄', '❅', '❆'];
+            const count = isMobile ? 20 : 30;
+            
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes fall {
+                    to {
+                        transform: translateY(${window.innerHeight + 20}px);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const snowflake = document.createElement('div');
+                    snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+                    snowflake.classList.add('snowflake');
+                    
+                    const startX = Math.random() * window.innerWidth;
+                    const duration = Math.random() * 15 + 10;
+                    const size = isMobile ? 
+                        Math.random() * 8 + 6 : 
+                        Math.random() * 12 + 8;
+                    
+                    snowflake.style.left = `${startX}px`;
+                    snowflake.style.top = `-20px`;
+                    snowflake.style.fontSize = `${size}px`;
+                    snowflake.style.opacity = Math.random() * 0.5 + 0.3;
+                    snowflake.style.animation = `fall ${duration}s linear infinite`;
+                    snowflake.style.willChange = 'transform, opacity'; // Optimize animation
+                    
+                    document.body.appendChild(snowflake);
+                }, i * 200);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createSnowflakes();
+            const avatar = document.querySelector('.avatar');
+            const heading = document.querySelector('h1');
+            const socialIcons = document.querySelectorAll('.social-icon');
+            
+            avatar.style.opacity = '0';
+            avatar.style.transform = 'translateY(20px)';
+            heading.style.opacity = '0';
+            heading.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                avatar.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                avatar.style.opacity = '1';
+                avatar.style.transform = 'translateY(0)';
+            }, 200);
+            
+            setTimeout(() => {
+                heading.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                heading.style.opacity = '1';
+                heading.style.transform = 'translateY(0)';
+            }, 400);
+            
+            socialIcons.forEach((icon, index) => {
+                setTimeout(() => {
+                    icon.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    icon.style.opacity = '1';
+                }, 600 + (index * 100));
+            });
+        });
+    </script>
+</body>
+</html>
